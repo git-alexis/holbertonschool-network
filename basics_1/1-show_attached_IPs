@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # displays all active IPv4 IPs on the machine it’s executed on
-ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}' |
- while read ip; do
+while IFS= read -r ip; do
     echo "$ip"
-done
+done < <(ip -4 addr show | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
